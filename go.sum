@@ -1,0 +1,12 @@
+github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51 h1:Z9n2FFNUXsshfwJMBgNA0RU6/i7WVaAegv3PtuIHPMs=
+github.com/kballard/go-shellquote v0.0.0-20180428030007-95032a82bc51/go.mod h1:CzGEWj7cYgsdH8dAjBGEr58BoE7ScuLd+fwFZ44+/x8=
+github.com/scottlaird/vyos-parser v0.0.0-20250127210709-47685d5deb9b h1:DkL3tj9oRLiYarT9YCwY50aikBDcjVpkZpZe8893ufw=
+github.com/scottlaird/vyos-parser v0.0.0-20250127210709-47685d5deb9b/go.mod h1:0pPPkTUie7fq8v/JnnMoH4ImIZg6n5fDmQggAjZHFyI=
+github.com/scottlaird/vyos-parser/configmodel v0.0.0-20250127210709-47685d5deb9b h1:SVzRn3PqJx61oJBJU+NXjdLCAsfUb81zJ2FuOoRd/NE=
+github.com/scottlaird/vyos-parser/configmodel v0.0.0-20250127210709-47685d5deb9b/go.mod h1:4McWG1RFqotHLWfg2g5AHNqPY4NtjKM4D3bn72/fPkA=
+github.com/shurcooL/go v0.0.0-20200502201357-93f07166e636 h1:aSISeOcal5irEhJd1M+IrApc0PdcN7e7Aj4yuEnOrfQ=
+github.com/shurcooL/go v0.0.0-20200502201357-93f07166e636/go.mod h1:TDJrrUr11Vxrven61rcy3hJMUqaf/CLWYhHNPmT14Lk=
+github.com/shurcooL/go-goon v1.0.0 h1:BCQPvxGkHHJ4WpBO4m/9FXbITVIsvAm/T66cCcCGI7E=
+github.com/shurcooL/go-goon v1.0.0/go.mod h1:2wTHMsGo7qnpmqA8ADYZtP4I1DD94JpXGQ3Dxq2YQ5w=
+honnef.co/go/js/dom/v2 v2.0.0-20241221162326-00dae5193c3f h1:s3ApZ6lphLkeyvfCsL1lVLK3LAFgivtJoYYFlusxLhg=
+honnef.co/go/js/dom/v2 v2.0.0-20241221162326-00dae5193c3f/go.mod h1:+JtEcbinwR4znM12aluJ3WjKgvhDPKPQ8hnP4YM+4jI=

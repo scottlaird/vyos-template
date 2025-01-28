@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="index.css"/>
+    <script src="wasm_exec.js"></script>
+    <script>
+      const go = new Go();
+      WebAssembly.instantiateStreaming(fetch("template.wasm"), go.importObject).then((result) => {
+      go.run(result.instance);
+      updatetarget();
+      });
+
+      function openTab(evt, tabName) {
+          var i, tabcontent, tablinks;
+          
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+          }
+          
+          // Get all elements with class="tablinks" and remove the class "active"
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+          
+          // Show the current tab, and add an "active" class to the button that opened the tab
+          document.getElementById(tabName).style.display = "block";
+          evt.currentTarget.className += " active";
+      }
+
+    </script>
+  </head>
+  <body>
+    <h1>VyOS Config Template Generator</h1>
+    <p>This can convert a <a href="https://vyos.io">VyOS</a> configuration between formats.</p>
+    <button onclick="updatetarget()">Convert</button>
+    <h2>Source Config</h2>
+    <textarea id="source" style="width:100%" rows="20" oninput="updatetarget()">firewall {
+    flowtable default {
+        interface eth0
+        interface eth1
+        offload software
+    }
+}
+    </textarea>
+
+    <h2>Output</h2>
+
+    <div class="tab">
+      <div id="buttons">
+        <button class="tablinks" onclick="openTab(event, 'set')">Set</button>
+        <button class="tablinks" onclick="openTab(event, 'show')">Show</button>
+        <button class="tablinks" onclick="openTab(event, 'boot')">Boot</button>
+      </div>
+      <div id="set" class="tabcontent defaulttab">
+        <h3>Config in <tt>set</tt> format</h3>
+        <pre id="targetSet"></pre>
+      </div>
+      <div id="show" class="tabcontent">
+        <h3>Config in <tt>show</tt> format</h3>
+        <pre id="targetShow"></pre>
+      </div>
+      <div id="boot" class="tabcontent">
+        <h3>Config in <tt>/config/config.boot</tt> format</h3>
+        <pre id="targetBoot"></pre>
+      </div>
+    </div>
+  </body>
+</html>
