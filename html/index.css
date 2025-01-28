@@ -38,3 +38,13 @@
 .defaulttab {
     display: block;
 }
+
+form { display: table; width:100%}
+form div { display: table-row; }
+form input { display: table-cell; }
+form label { display: table-cell; }
+form span { display: table-cell; width:20em;}
+
+.notice {
+    color:red;
+}
