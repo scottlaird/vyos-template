@@ -1,0 +1,117 @@
+{{ if .EnableFlowtable }}
+ firewall {
+     flowtable default {
+         interface {{ .WanInterface }}
+         interface {{ .LanInterface }}
+         offload software
+     }
+     group {
+         interface-group default {
+             interface {{ .WanInterface }}
+             interface {{ .LanInterface }}
+         }
+     }
+     ipv4 {
+         forward {
+             filter {
+                 default-action reject
+                 rule 10 {
+                     action offload
+                     inbound-interface {
+                         group default
+                     }
+                     offload-target default
+                 }
+             }
+         }
+     }
+ }
+ system {
+   conntrack {
+   }
+ }
+{{ end }}
+ interfaces {
+     ethernet {{ .WanInterface }} {
+         description "WAN Interface"
+         {{ if .WanUseDHCP }}
+         address dhcp
+         {{ else }}
+         address {{ .WanStaticIPv4Address }}
+         {{ end }}
+     }
+     ethernet {{ .LanInterface }} {
+         description "LAN Interface"
+         address {{ .LanIPv4Address }}
+     }
+     loopback lo {
+     }
+ }
+{{ if not .WanUseDHCP }}
+ protocols {
+     static {
+         route 0.0.0.0/0  {
+             next-hop {{ .WanStaticGatewayAddress }} {
+             }
+         }
+     }
+ }
+{{ end }}
+ service {
+     lldp {
+         interface {{ .LanInterface }} {
+         }
+     }
+     ntp {
+         server 0.pool.ntp.org {
+         }
+         server 1.pool.ntp.org {
+         }
+         server 2.pool.ntp.org {
+         }
+     }
+{{ if .EnableSNMP }}
+     snmp {
+         community {{ .SNMPv2Community }} {
+             authorization ro
+         }
+     }
+{{ end }}
+     {{ if .EnableSSH }}
+     ssh {
+         disable-host-validation
+         port 22
+     }
+     {{ end }}
+ }
+ system {
+     {{ if .EnableSerialConsole }}
+     console {
+         device {{ .SerialConsolePort }} {
+             speed {{ .SerialConsoleSpeed }}
+         }
+     }
+     {{ end }}
+     host-name {{ .Hostname }}
+     name-server {{ .DnsServer1 }}
+     name-server {{ .DnsServer2 }}
+ }
+
+{{ if .EnableNAT }}
+nat {
+    source {
+        rule 100 {
+            description "Outbound NAT"
+            outbound-interface {
+                name {{ .WanInterface }}
+            }
+            source {
+                address {{ .NATNetwork }}
+            }
+            translation {
+                address masquerade
+            }
+        }
+    }
+}
+{{ end }}

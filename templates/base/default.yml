@@ -1,0 +1,110 @@
+Name: Default
+Description: Test template for VyOS
+VyOSVersion: 1.5
+Variables:
+  Hostname:
+    Priority: 10
+    Type: hostname
+    Label: "Router hostname"
+    Default: router
+  WanInterface:
+    Priority: 20
+    Type: string
+    Label: "WAN interface name"
+    HelpText: "This is the interface that VyOS uses to connect to the internet.  For this configuration template, it must be an Ethernet interface."
+    Default: eth0
+    Regex: "((eth|lan)[0-9]+|(eno|ens|enp|enx).+)"
+  LanInterface:
+    Priority: 30
+    Type: string
+    Label: "LAN interface name"
+    HelpText: "This is the interface that VyOS uses to connect to your network.  For this configuration template, it must be an Ethernet interface."
+    Default: eth1
+    Regex: "((eth|lan)[0-9]+|(eno|ens|enp|enx).+)"
+  WanUseDHCP:
+    Priority: 100
+    Type: boolean
+    Label: Use DHCP for WAN
+    Default: true
+  WanStaticIPv4Address:
+    Priority: 110
+    Unless: WanUseDHCP
+    Type: ipv4prefix
+    Label: "WAN IPv4 address"
+    HelpText: "The IPv4 address to use for the WAN interface, if you're not using DHCP"
+  WanStaticGatewayAddress:
+    Priority: 111
+    Unless: WanUseDHCP
+    Type: ipv4address
+    Label: "WAN IPv4 gateway address"
+    HelpText: "The IPv4 address of your WAN gateway.  Generally provided by your ISP."
+  LanIPv4Address:
+    Priority: 200
+    Type: ipv4prefix
+    Label: "LAN IPv4 address with netmask"
+    HelpText: "The IPv4 address to use for the LAN interface.  This will frequently be 192.168.0.1/24, although it may be any valid IPv4 address."
+    Default: 192.168.0.1/24
+  DnsServer1:
+    Priority: 500
+    Type: ipaddress
+    Label: "DNS Server #1"
+    Default: 8.8.8.8
+  DnsServer2:
+    Priority: 501
+    Type: ipaddress
+    Label: "DNS Server #2"
+    Default: 8.8.4.4
+  EnableNAT:
+    Priority: 600
+    Type: boolean
+    Label: "Enable NAT"
+    Default: true
+  NATNetwork:
+    OnlyIf: EnableNAT
+    Priority: 601
+    Type: ipv4prefix
+    Label: "Internal network address space to NAT"
+    Default: 192.168.0.0/16
+  EnableFlowtable:
+    Priority: 650
+    Type: boolean
+    Label: "Enable Flowtable/NAT fastpath"
+    Default: true
+  EnableSSH:
+    Priority: 1000
+    Type: boolean
+    Label: "Enable SSH server"
+    HelpText: "Run an SSH server on VyOS, allowing remote login."
+    Default: false
+  EnableSNMP:
+    Priority: 1010
+    Type: boolean
+    Label: "Enable SNMP"
+    Default: false
+  SNMPv2Community:
+    OnlyIf: EnableSNMP
+    Priority: 1011
+    Type: string
+    Label: "SNMP Read-Only Community Name"
+    Default: public
+  EnableSerialConsole:
+    Priority: 1110
+    Type: boolean
+    Label: "Enable serial console"
+    Default: false
+  SerialConsolePort:
+    Priority: 1111
+    OnlyIf: EnableSerialConsole
+    Type: string
+    Regex: "^tty.*"
+    Label: "Serial console port name"
+    Default: "ttyS0"
+  SerialConsoleSpeed:
+    Priority: 1112
+    OnlyIf: EnableSerialConsole
+    Type: integer
+    Label: "Serial console speed"
+    Default: 115200
+
+      
+      

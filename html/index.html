@@ -34,19 +34,20 @@
   </head>
   <body>
     <h1>VyOS Config Template Generator</h1>
-    <p>This can convert a <a href="https://vyos.io">VyOS</a> configuration between formats.</p>
-    <button onclick="updatetarget()">Convert</button>
-    <h2>Source Config</h2>
-    <textarea id="source" style="width:100%" rows="20" oninput="updatetarget()">firewall {
-    flowtable default {
-        interface eth0
-        interface eth1
-        offload software
-    }
-}
-    </textarea>
+    <p>This can generate <a href="https://vyos.io">VyOS</a> starter
+    configurations to help make it easier to get started.</p>
+    <p><strong>THIS IS A DEMONSTRATION</strong>.  The configs generated come from
+    templates that aren't optimal and haven't really been validated
+    for correct operation.  There are almost certainly very real
+      problems with them.</p>
+    <p>Also, this is <em>obviously</em> not fully complete and has
+    major usability and formatting shortcomings.</p>
 
-    <h2>Output</h2>
+    <h2>Configuration Settings</h2>
+    <form action="" id="configForm" oninput="updatetarget()">
+    </form>
+    
+    <h2>Live Generated Configuration</h2>
 
     <div class="tab">
       <div id="buttons">
@@ -56,6 +57,9 @@
       </div>
       <div id="set" class="tabcontent defaulttab">
         <h3>Config in <tt>set</tt> format</h3>
+        <p><em>Copy this onto your router.  Log in,
+        enter</em> <code>configuration</code> <em>mode, and paste this
+        in.</em></p>
         <pre id="targetSet"></pre>
       </div>
       <div id="show" class="tabcontent">
@@ -67,5 +71,7 @@
         <pre id="targetBoot"></pre>
       </div>
     </div>
+
+    <p><em>See <a href="https://github.com/scottlaird/vyos-template">https://github.com/scottlaird/vyos-template</a> for source.</em></p>
   </body>
 </html>
