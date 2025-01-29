@@ -25,5 +25,5 @@ go.work.sum
 .env
 
 *~
-template.wasm
-template-tiny.wasm
+/template.wasm
+/template-tiny.wasm
