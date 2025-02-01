@@ -5,9 +5,11 @@
     <script src="wasm_exec_tiny.js"></script>
     <script>
       const go = new Go();
+      var wasm;
       WebAssembly.instantiateStreaming(fetch("template-tiny.wasm"), go.importObject).then((result) => {
-      go.run(result.instance);
-      updatetarget();
+          wasm = result.instance;
+          go.run(wasm);
+          wasm.exports.updatetargettiny();         
       });
 
       function openTab(evt, tabName) {
@@ -44,7 +46,7 @@
     major usability and formatting shortcomings.</p>
 
     <h2>Configuration Settings</h2>
-    <form action="" id="configForm" oninput="updatetarget()">
+    <form action="" id="configForm" oninput="wasm.exports.updatetargettiny()">
     </form>
     
     <h2>Live Generated Configuration</h2>
