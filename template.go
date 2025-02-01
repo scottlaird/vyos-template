@@ -144,11 +144,11 @@ func EnableDisableForm(formID string, vars config.VariableDefinitionMap, values 
                 
                 input := d.GetElementByID(k).(*dom.HTMLInputElement)
                 input.SetDisabled(!enable) 
-                if vars[k].Type != "boolean" {
-                        values[k] = input.Value()
-                } else {
-                        values[k] = input.Checked()
-                }
+                //                if vars[k].Type != "boolean" {
+                //                        values[k] = input.Value()
+                //                } else {
+                //                        values[k] = input.Checked()
+                //                }
         }
 }
 
